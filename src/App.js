@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SearchRecipe from './SearchRecipe'
 import RecipeList from './RecipeList'
+import ShowRecipe from './ShowRecipe'
 import axios from 'axios'
 import dotenv from 'dotenv';
 dotenv.config();
@@ -12,13 +13,13 @@ class App extends Component {
     super(props)
     this.state = {
       recipes: [],
-      recipe: [],
-      query: ''
+      recipe: '',
+      query: '',
+      selectedRecipe: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleSubmit = this.handleShowRecipe.bind(this);
+    this.handleShowRecipe = this.handleShowRecipe.bind(this);
   }
-  //this component fires before it rendors. Works the same as windows.onload
 
   handleSubmit(searchTerm) {
     const app_key = process.env.APP_KEY
@@ -32,7 +33,6 @@ class App extends Component {
       .then(response => {
         this.setState({
           recipes: response.data.hits.slice(0, 10),
-          // recipe: response.data.hits.recipe.recipe,
           query: searchTerm
         })
         console.log(this.state.recipe)
@@ -43,22 +43,22 @@ class App extends Component {
 
   };
 
-  // handleShowRecipe = (recipe) => {
-  //   this.setState({ selectedRecipe: recipe})
-  //   return(
-  //     {/* <ShowRecipe recipeLink={this.state.selectedRecipe}/>  */}
-  //   )
+  handleShowRecipe = (recipe) => {
+    console.log('handleshowrecipe')
+    this.setState({ selectedRecipe: recipe})
+    
      
-  // }
+  }
 
   render() {
    
-    console.log("Test", this.state.recipes)
+    console.log("Test", this.state)
     return (
       <div className="App">
         <h1>Recipes</h1>
         <SearchRecipe handleSubmit={this.handleSubmit} />
-        <RecipeList recipes={this.state.recipes} />
+        <RecipeList recipes={this.state.recipes} handleShowRecipe={this.handleShowRecipe} />
+        <ShowRecipe recipe = {this.state.selectedRecipe} handleShowRecipe={this.handleShowRecipe} />
       </div>
     );
   }

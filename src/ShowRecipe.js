@@ -2,22 +2,25 @@ import React from 'react';
 import './App.css';
 
 
-const ShowRecipe = (props) => (
+
+const ShowRecipe = (props) => {
     
+    console.log('show recipe', props)
+    // const recipeTitle = props.searchTerm
+    // const recipeImage = props.recipe.recipe.image  
+    // const recipeIngrediants = props.recipe.recipe.ingredients
+    // const recipeDescription = props.recipe.recipe.description
+
+    return (
+
     <div>
-        {console.log(props)}
-        console.log(props)
-                {/* console.log(recipe.recipe.label) */}
-                return (
-                    {/* <div>
-                    <h2>{recipe.recipe.label}</h2>
-                    <img src={recipe.recipe.image} alt={recipe.recipe.label}/>
-                    </div> */}
-                )
-                
-            
-        }
+        {/* {recipeTitle}
+        {recipeImage}
+        {recipeIngrediants}
+        {recipeDescription} */}
     </div>
 )
+
+}
 
 export default ShowRecipe
